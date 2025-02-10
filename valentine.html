@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Can you be my Valentine, Angelique?</title>
+    <style>
+      /* Center everything */
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+        flex-direction: column;
+        background-color: #ffe4e1;
+        font-family: "Comic Sans MS", cursive, sans-serif;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* Make sure GIFs play properly */
+      #cinnamoroll-gif {
+        width: 300px; /* Adjust size */
+        height: auto;
+      }
+
+      .btn-container {
+        margin-top: 20px;
+      }
+
+      button {
+        padding: 12px 24px;
+        font-size: 18px;
+        margin: 8px;
+        cursor: pointer;
+        border-radius: 12px;
+        border: none;
+        font-weight: bold;
+      }
+
+      #yes-btn {
+        background-color: #4caf50; /* Green */
+        color: white;
+      }
+
+      #no-btn {
+        background-color: #ff6666; /* Red */
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Gif -->
+      <div id="gif-container">
+        <img
+          id="cinnamoroll-gif"
+          src="https://i.pinimg.com/originals/0c/62/f9/0c62f95fb8b5ee6ee3ab84a8e4cc9a64.gif"
+          alt="A cute picture of Cinnamoroll"
+        />
+      </div>
+
+      <!-- Question -->
+      <h1 id="message">Can you be my Valentine, Angelique? (˶ᵔ ᵕ ᵔ˶)</h1>
+    </div>
+
+    <!-- Buttons -->
+    <div class="btn-container">
+      <button id="yes-btn" onclick="changeToHappy()">Yes</button>
+      <button id="no-btn" onclick="changeToSad()">No</button>
+    </div>
+
+    <script>
+      function changeToHappy() {
+        let gifContainer = document.getElementById("gif-container");
+        gifContainer.innerHTML = `<img id="cinnamoroll-gif" 
+                                   src="https://media.tenor.com/xIEKHAcKvv8AAAAj/sanrio.gif" 
+                                 alt="Happy Cinnamoroll" />`;
+        document.getElementById("message").innerText =
+          "Yay! I love you! Now we talk (ﾉ◕ヮ◕)ﾉ";
+
+        // Make "No" button disappear
+        document.getElementById("no-btn").style.display = "none";
+      }
+
+      function changeToSad() {
+        let gifContainer = document.getElementById("gif-container");
+
+        // Array of crying GIFs
+        let cryingGifs = [
+          "https://media.tenor.com/NwdC14NHxRIAAAAj/cinnamoroll.gif",
+          "https://i.pinimg.com/originals/5c/44/b6/5c44b624f35789fc3f6e4ab58394ccb8.gif",
+        ];
+
+        // Randomly pick a crying GIF
+        let randomCryingGif =
+          cryingGifs[Math.floor(Math.random() * cryingGifs.length)];
+
+        // Random sad messages
+        let sadMessages = [
+          "Why not, baby? (｡•́︿•̀｡)",
+          "Don't break my heart... (╥﹏╥)",
+          "But I love you... (´•̥̥̥ ‸ •̥̥̥`)",
+          "Please reconsider? (╯︵╰,)",
+          "I’m gonna cry... (ಥ﹏ಥ)",
+        ];
+
+        let randomMessage =
+          sadMessages[Math.floor(Math.random() * sadMessages.length)];
+
+        // Force refresh the crying GIF by setting a new image element
+        let img = document.createElement("img");
+        img.id = "cinnamoroll-gif";
+        img.src = randomCryingGif + "?t=" + new Date().getTime(); // Prevent caching
+        img.alt = "Crying Cinnamoroll";
+        img.style.width = "300px"; // Maintain size
+        img.style.height = "auto";
+
+        // Clear old image and add the new one
+        gifContainer.innerHTML = "";
+        gifContainer.appendChild(img);
+
+        document.getElementById("message").innerText = randomMessage;
+      }
+    </script>
+  </body>
+</html>
